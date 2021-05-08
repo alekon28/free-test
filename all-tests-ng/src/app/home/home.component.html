@@ -1,0 +1,12 @@
+<div *ngIf="userData; then thenBlock else elseBlock"></div>
+
+<ng-template class="container" #thenBlock>
+  <p class="h2">User data</p>
+  <p class="h3">ID: {{ userData.id }}</p>
+  <p class="h3">Username: {{ userData.username }}</p>
+  <p class="h3">Created at: {{ userData.created_at }}</p>
+  <p class="h3">Role: {{ userData.role }}</p>
+</ng-template>
+<ng-template class="container" #elseBlock>
+  <p class="h2">Please sign in</p>
+</ng-template>

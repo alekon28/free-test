@@ -1,0 +1,27 @@
+<form class="container">
+  <div class="form-group container">
+    <input type="text" class="form-control" placeholder="Enter test name" #testName (input)="changeTestName(testName.value)">
+    <input type="text" class="form-control" placeholder="Enter test token (optional)" #testToken (input)="changeTestToken(testToken.value)">
+    <small id="emailHelp" class="form-text text-muted"></small>
+  </div>
+  <div class="container">
+    <div class="container border border-info m-2" id="scaleContainer">
+      <app-create-scale class="m-2" (newScaleEvent)="addScale($event)"></app-create-scale>
+    </div>
+    <div class="container" *ngFor="let scale of testData.scales">
+      Scale: {{ scale.name }}
+    </div>
+    <div class="container border border-info m-2" id="questionContainer">
+      <app-create-question class="m-2" (newQuestionEvent)="addQuestion($event)"></app-create-question>
+    </div>
+    <div class="container" *ngFor="let question of testData.questions">
+      Question: {{ question.text }}
+      Answers: {{ question.answers | json }}
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+</form>
+<div class="container alert-success" *ngIf="response">{{ response.message }}</div>
+<div class="container border border-danger">
+  {{ testData | json }}
+</div>

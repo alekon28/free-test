@@ -1,0 +1,10 @@
+<div class="container" *ngIf="userTests; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock class="container">
+    <div class="container" *ngFor="let test of userTests">
+      <em>{{ test | json }}</em>
+    </div>
+</ng-template>
+<ng-template #elseBlock class="container">
+  <p class="h2">Please login</p>
+</ng-template>
+

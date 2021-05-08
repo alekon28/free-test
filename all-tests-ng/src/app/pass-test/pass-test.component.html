@@ -1,0 +1,22 @@
+<div class="container row">
+  <input type="text" class="form-control col-3" #testID placeholder="Test ID">
+  <button class="btn btn-primary" (click)="getTest(testID.value)">Submit</button>
+</div>
+<div *ngIf="testData; then thenBlock else elseBlock"></div>
+<ng-template class="container" #thenBlock>
+  <em class="h3">Name: {{ testData.name }}</em>
+  <div class="container" *ngFor="let question of testData.questions">
+    <ul>
+      <li>{{ question.text }}</li>
+      <div *ngFor="let answer of question.answers">
+        <ul>
+          <li>{{ answer.text }}</li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+</ng-template>
+<ng-template class="container" #elseBlock>
+  <p class="h2">Enter test id</p>
+</ng-template>
+

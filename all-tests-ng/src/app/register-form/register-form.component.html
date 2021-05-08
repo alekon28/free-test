@@ -1,0 +1,19 @@
+<form class="container">
+  <div class="form-group">
+    <label>Email address</label>
+    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" (input)="usernameInputHandler($event)">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label >Password</label>
+    <input type="password" class="form-control" placeholder="Password" (input)="passwordInputHandler($event)">
+  </div>
+  <div class="form-group">
+    <label >Password again</label>
+    <input type="password" class="form-control" placeholder="Password" (input)="password2InputHandler($event)">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="sendData()">Submit</button>
+</form>
+<div class="container alert-info" *ngIf="message">
+  {{ message.message }}
+</div>

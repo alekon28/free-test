@@ -1,0 +1,16 @@
+<div class="container">
+  <input class="form-control m-2" placeholder="Enter question text" #queText (input)="changeQuestionText(queText.value)">
+  <div class="container border border-primary m-2">
+    <app-create-answer (newAnswerEvent)="addAnswer($event)" class="m-2"></app-create-answer>
+  </div>
+  <div class="container border border-primary m-2">
+    Question text: {{ questionData.text }}
+    <div class="container" *ngFor="let answer of questionData.answers">
+      Answer text: {{ answer.text }} answer impact_type: {{ answer.impact_type }} answer impact_value: {{ answer.impact_value }}
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit" (click)="submit()">Submit</button>
+</div>
+<div class="container border border-danger">
+  {{ questionData | json }}
+</div>
