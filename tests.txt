@@ -1,0 +1,22 @@
+#register <lolo:lolo>
+curl -i -X POST -H "Content-Type: application/json" --data '{"username":"lolo","password":"lolo"}' http://127.0.0.1:5000/api/signup -v
+
+#login <lolo:lolo>
+curl -i -X POST -H "Content-Type: application/json" --data '{"username":"lolo","password":"lolo"}' http://127.0.0.1:5000/api/signin -v
+
+#user info <lolo:lolo>
+curl -i -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyMDIyOTMxMiwianRpIjoiNDI3ZWEwOTItYjY0Mi00Y2M5LTlhNWMtOTdkNzFmMGRlZDJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImxvbG8iLCJuYmYiOjE2MjAyMjkzMTIsImV4cCI6MTYyMDMxNTcxMn0.lyJ-9BtBkePEPfd_8-JlMO3Gb3srdi0REcIL6HN5VmA" http://127.0.0.1:5000/api/info -v
+
+test data json
+{
+    "name": "str"
+    "token": "str | null"
+    "questions": [Question]
+    "guests": [Guest]
+    "scales": [Scale]
+}
+
+question data json
+{
+
+}
