@@ -24,8 +24,7 @@ export class CreateTestComponent implements OnInit {
     "name": "",
     "token": "",
     "questions": [],
-    "guests": [],
-    "scales": []
+    "guests": []
   }
 
   response: Message;
@@ -35,10 +34,6 @@ export class CreateTestComponent implements OnInit {
 
   addQuestion(data: QuestionData): void {
     this.testData.questions.push(data);
-  }
-
-  addScale(data: ScaleData): void {
-    this.testData.scales.push(data);
   }
 
   changeTestName(name: string) {

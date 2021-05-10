@@ -15,14 +15,14 @@ guest_answers = db.Table(
 class Answer(db.Model):
     id: int
     question_id: int
-    scale_id: int
+    scale_name: int
     text: str
     impact_type: str
     impact_value: int
 
     id = db.Column(db.Integer, primary_key=True)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    scale_id = db.Column(db.Integer, db.ForeignKey('scale.id'), nullable=False)
+    scale_name = db.Column(db.String, nullable=False)
     text = db.Column(db.String(8192), nullable=False)
     impact_type = db.Column(db.String(1), nullable=False)
     impact_value = db.Column(db.Integer, nullable=False)
@@ -37,26 +37,6 @@ class Answer(db.Model):
             self.text = text
             self.impact_type = impact_type
             self.impact_value = impact_value"""
-
-
-@dataclass
-class Scale(db.Model):
-    id: int
-    test_id: int
-    name: str
-    answers: Answer
-
-    id = db.Column(db.Integer, primary_key=True)
-    test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable=False)
-    name = db.Column(db.String(256), nullable=False)
-    answers = db.relationship('Answer', backref='scale', lazy=True)
-
-    def __repr__(self):
-        return '<Scale %r>' % self.id
-
-    """    def __init__(self, test_id, name):
-            self.test_id = test_id
-            self.name = name"""
 
 
 @dataclass
@@ -109,7 +89,6 @@ class Test(db.Model):
     token: str
     questions: Question
     guests: Guest
-    scales: Scale
 
     id = db.Column(db.Integer, primary_key=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -117,7 +96,6 @@ class Test(db.Model):
     token = db.Column(db.String(256), nullable=True)
     questions = db.relationship('Question', backref='test', lazy=True)
     guests = db.relationship('Guest', backref='test', lazy=True)
-    scales = db.relationship('Scale', backref='test', lazy=True)
 
     def __repr__(self):
         return '<Test %r>' % self.id
@@ -135,6 +113,7 @@ class User(db.Model):
     id: int
     username: str
     created_at: str
+    password_hash: str
     role: str
     tests: Test
 

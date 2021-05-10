@@ -8,6 +8,7 @@ import {Message} from "./Message";
 import {UserData} from "./UserData";
 import { HttpHeaders } from '@angular/common/http';
 import {TestData} from "./TestData";
+import {PassTestData} from "./PassTestData";
 
 @Injectable()
 export class ApiService {
@@ -88,6 +89,13 @@ export class ApiService {
 
   public getTest(id: string) {
     return this.http.get<TestData>(this.api_host + 'api/test/' + id)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  public passTest(passTestData: PassTestData) {
+    return this.http.post<Message>(this.api_host + 'api/test/pass', passTestData)
       .pipe(
         catchError(this.handleError)
       )

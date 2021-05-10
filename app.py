@@ -19,13 +19,14 @@ db.create_all()
 
 from api.Auth import Signup, Signin
 from api.UserData import UserData
-from api.TestData import AddTest, UserTests, GetTest
+from api.TestData import AddTest, UserTests, GetTest, PassTest
 api.add_resource(UserTests, "/api/tests")
 api.add_resource(AddTest, "/api/test")
 api.add_resource(Signup, "/api/signup")
 api.add_resource(Signin, "/api/signin")
 api.add_resource(UserData, "/api/info")
 api.add_resource(GetTest, "/api/test/<test_id>")
+api.add_resource(PassTest, "/api/test/pass")
 
 if __name__ == '__main__':
     app.run()

@@ -1,4 +1,7 @@
-<div class="container row">
-  <input type="text" class="form-control col-3" placeholder="Enter scale name" #scaleName (input)="changeScaleName(scaleName.value)">
-  <button class="btn btn-primary" (click)="submit()">Submit</button>
+<div class="container">
+  <p class="h4">Add one or more scales:</p>
+  <div class="container row">
+  <input type="text" class="form-control col-6" placeholder="Enter scale name" #scaleName (input)="changeScaleName(scaleName.value)">
+  <button class="btn btn-primary col" (click)="submit(); scaleName.value = ''">Add new scale</button>
+  </div>
 </div>

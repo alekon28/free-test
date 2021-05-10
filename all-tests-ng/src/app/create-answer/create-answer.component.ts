@@ -17,7 +17,7 @@ export class CreateAnswerComponent implements OnInit {
   answerData: AnswerData = {
     "id": 0,
     "question_id": 0,
-    "scale_id": 0,
+    "scale_name": "",
     "text": "",
     "impact_type": "",
     "impact_value": 0
@@ -26,6 +26,10 @@ export class CreateAnswerComponent implements OnInit {
   @Output() newAnswerEvent = new EventEmitter<AnswerData>();
 
   ngOnInit(): void {
+  }
+
+  changeScale(text: string): void {
+    this.answerData.scale_name = text;
   }
 
   changeAnswerText(text: string): void {
@@ -44,7 +48,7 @@ export class CreateAnswerComponent implements OnInit {
     let ds: AnswerData = {
       "id": this.answerData.id,
       "question_id": this.answerData.question_id,
-      "scale_id": this.answerData.scale_id,
+      "scale_name": this.answerData.scale_name,
       "text": this.answerData.text,
       "impact_type": this.answerData.impact_type,
       "impact_value": this.answerData.impact_value

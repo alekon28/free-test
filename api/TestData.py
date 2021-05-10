@@ -1,6 +1,8 @@
+import datetime
+
 from flask_restful import Resource, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from DBModels import db, User, Test, Scale, Question, Answer
+from DBModels import db, User, Test, Question, Answer, Guest
 from flask import jsonify
 
 
@@ -22,21 +24,17 @@ class AddTest(Resource):
         test_name = body["name"]
         test_token = body["token"]
         questions = body["questions"]
-        test_scales = body["scales"]
         uid = User.query.with_entities(User.id).filter_by(username=user).first()[0]
         if uid is None:
             return {'message': 'user has been deleted'}, 401
         test = Test(created_by=uid, name=test_name, token=test_token)
-        for scale in body["scales"]:
-            scl = Scale(name=scale["name"], answers=[])
-            test.scales.append(scl)
         for question in body["questions"]:
             qst = Question(number=1, text=question["text"])
             for answer in question["answers"]:
                 ans = Answer(
                     impact_type=answer["impact_type"],
                     impact_value=answer["impact_value"],
-                    scale_id=1,
+                    scale_name=answer["scale_name"],
                     text=answer["text"]
                 )
                 qst.answers.append(ans)
@@ -68,7 +66,7 @@ class GetTest(Resource):
                 "answers": list(map(lambda y: {
                     "id": y.id,
                     "question_id": y.question_id,
-                    "scale_id": y.scale_id,
+                    "scale_name": y.scale_name,
                     "text": y.text,
                     "impact_type": y.impact_type,
                     "impact_value": y.impact_value
@@ -78,3 +76,25 @@ class GetTest(Resource):
         print(result)
         return jsonify(result).get_json(), 200
         #return {"message": f"under maintenance id: {test_id}"}, 200
+
+
+class PassTest(Resource):
+    def post(self):
+        body = request.get_json()
+        test_id = body["test_id"]
+        guest_name = body["guest_name"]
+        token = body["token"]
+        answers_ids = body["answer_ids"]
+        g = Guest(test_id=test_id, guest_name=guest_name)
+        for i in answers_ids:
+            g.answers.append(Answer.query.filter_by(id=i).first())
+        db.session.add(g)
+        db.session.commit()
+        return {"message": "success"}, 200
+
+
+class TestStat(Resource):
+    @jwt_required()
+    def get(self):
+        user = get_jwt_identity()
+        uid = User.query.with_entities(User.id).filter_by(username=user).first()[0]

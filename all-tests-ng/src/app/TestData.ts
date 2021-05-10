@@ -9,5 +9,4 @@ export interface TestData {
   token: string
   questions: QuestionData[]
   guests: GuestData[]
-  scales: ScaleData[]
 }
