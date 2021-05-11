@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
-import {AuthToken} from "../AuthToken";
-import {AuthData} from "../AuthData";
-import {Message} from "../Message";
+import {AuthToken} from "../DataModels/AuthToken";
+import {AuthData} from "../DataModels/AuthData";
+import {Message} from "../DataModels/Message";
 
 @Component({
   selector: 'app-register-form',

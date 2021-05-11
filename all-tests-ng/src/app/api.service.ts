@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import { AuthData } from "./AuthData";
-import {AuthToken} from "./AuthToken";
+import { AuthData } from "./DataModels/AuthData";
+import {AuthToken} from "./DataModels/AuthToken";
 import {Observable, throwError} from "rxjs";
 import { catchError } from "rxjs/operators";
-import {Message} from "./Message";
-import {UserData} from "./UserData";
+import {Message} from "./DataModels/Message";
+import {UserData} from "./DataModels/UserData";
 import { HttpHeaders } from '@angular/common/http';
-import {TestData} from "./TestData";
-import {PassTestData} from "./PassTestData";
+import {TestData} from "./DataModels/TestData";
+import {PassTestData} from "./DataModels/PassTestData";
+import {TestStatData} from "./DataModels/TestStatData";
+import {GuestData} from "./DataModels/GuestData";
 
 @Injectable()
 export class ApiService {
@@ -65,7 +67,7 @@ export class ApiService {
 
   public info() {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.jwt.token}`);
-    return this.http.get<UserData>(this.api_host + 'api/info', this.httpOptions)
+    return this.http.get<UserData>(this.api_host + 'api/user/info', this.httpOptions)
       .pipe(
         catchError(this.handleError)
       )
@@ -73,7 +75,7 @@ export class ApiService {
 
   public addTest(data: TestData) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.jwt.token}`);
-    return this.http.post<Message>(this.api_host + 'api/test', data, this.httpOptions)
+    return this.http.post<Message>(this.api_host + 'api/test/add', data, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       )
@@ -96,6 +98,14 @@ export class ApiService {
 
   public passTest(passTestData: PassTestData) {
     return this.http.post<Message>(this.api_host + 'api/test/pass', passTestData)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  public getTestStat(id: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.jwt.token}`);
+    return this.http.get<GuestData[]>(this.api_host + 'api/test/stat/' + id, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       )

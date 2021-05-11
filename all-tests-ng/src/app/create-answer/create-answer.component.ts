@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
-import {AnswerData} from "../AnswerData";
+import {AnswerData} from "../DataModels/AnswerData";
 import {TestCreatingService} from "../test-creating.service";
 
 @Component({

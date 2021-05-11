@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {TestData} from "../TestData";
-import {UserData} from "../UserData";
+import {TestData} from "../DataModels/TestData";
+import {UserData} from "../DataModels/UserData";
 import {ApiService} from "../api.service";
-import {PassTestData} from "../PassTestData";
+import {PassTestData} from "../DataModels/PassTestData";
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
-import {Message} from "../Message";
+import {Message} from "../DataModels/Message";
 
 @Component({
   selector: 'app-pass-test',

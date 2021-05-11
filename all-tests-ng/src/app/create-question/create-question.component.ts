@@ -1,9 +1,9 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {CreateAnswerComponent} from "../create-answer/create-answer.component";
-import {QuestionData} from "../QuestionData";
+import {QuestionData} from "../DataModels/QuestionData";
 import {TestCreatingService} from "../test-creating.service";
 import {QuestionCreatingService} from "../question-creating.service";
-import {AnswerData} from "../AnswerData";
+import {AnswerData} from "../DataModels/AnswerData";
 
 @Component({
   selector: 'app-create-question',

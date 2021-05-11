@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {ScaleData} from "../ScaleData";
-import {AnswerData} from "../AnswerData";
+import {ScaleData} from "../DataModels/ScaleData";
+import {AnswerData} from "../DataModels/AnswerData";
 import {TestCreatingService} from "../test-creating.service";
 
 @Component({

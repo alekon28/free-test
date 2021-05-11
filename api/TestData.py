@@ -39,7 +39,6 @@ class AddTest(Resource):
                 )
                 qst.answers.append(ans)
             test.questions.append(qst)
-
         db.session.add(test)
         db.session.commit()
         print(test)
@@ -51,8 +50,6 @@ class GetTest(Resource):
         test = Test.query.filter_by(id=test_id).first()
         if test is None:
             return {"message": "test doesn't exist"}, 404
-        print()
-
         result = {
             "id": test.id,
             "created_by": test.created_by,
@@ -73,9 +70,7 @@ class GetTest(Resource):
                 }, [answer for answer in x.answers]))
             }, [question for question in test.questions]))
         }
-        print(result)
         return jsonify(result).get_json(), 200
-        #return {"message": f"under maintenance id: {test_id}"}, 200
 
 
 class PassTest(Resource):
@@ -95,6 +90,21 @@ class PassTest(Resource):
 
 class TestStat(Resource):
     @jwt_required()
-    def get(self):
+    def get(self, test_id):
         user = get_jwt_identity()
         uid = User.query.with_entities(User.id).filter_by(username=user).first()[0]
+        if uid is None:
+            return {"message": "user has been deleted"}, 401
+        user_tests = Test.query.with_entities(Test.id).filter_by(created_by=uid).all()
+        u_tests = [t[0] for t in user_tests]
+        if int(test_id) not in u_tests:
+            return {"massage": "test not found"}, 404
+        gs = Guest.query.filter_by(test_id=test_id).all()
+        result = list(map(lambda x: {
+            "id": x.id,
+            "test_id": x.test_id,
+            "guest_name": x.guest_name,
+            "created_at": x.created_at,
+            "answers": [{"id": i.id} for i in x.answers]
+        }, gs))
+        return jsonify(result).get_json(), 200

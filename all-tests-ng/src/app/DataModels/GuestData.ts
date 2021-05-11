@@ -5,5 +5,7 @@ export interface GuestData{
   test_id: number
   guest_name: string
   created_at: string
-  answers: AnswerData
+  answers: {
+    id: number
+  }[]
 }

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {CreateScaleComponent} from "../create-scale/create-scale.component";
 import {CreateQuestionComponent} from "../create-question/create-question.component";
-import {TestData} from "../TestData";
+import {TestData} from "../DataModels/TestData";
 import {TestCreatingService} from "../test-creating.service";
-import {QuestionData} from "../QuestionData";
-import {ScaleData} from "../ScaleData";
+import {QuestionData} from "../DataModels/QuestionData";
+import {ScaleData} from "../DataModels/ScaleData";
 import {ApiService} from "../api.service";
-import {Message} from "../Message";
+import {Message} from "../DataModels/Message";
 
 
 @Component({

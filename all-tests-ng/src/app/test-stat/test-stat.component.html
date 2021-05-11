@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <input type="text" #testID class="form-control col-4" placeholder="Enter test ID">
+    <button (click)="getStat(testID.value)" class="btn btn-primary" >Get statistic</button>
+  </div>
+  <div class="container">
+    <div class="border border-info" *ngFor="let guest of testStat">
+      <div class="container">
+        <p class="h4">Guest name: <em>{{ guest.guest_name }}</em></p>
+        <p class="h4">Created at: <em>{{ guest.created_at }}</em></p>
+        <p class="h4">Guest answers:</p>
+        <div *ngFor="let answer of guest.answers">
+          <em>{{ answer.id }}</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="alert alert-danger">
+  {{ testStat | json }}
+</div>

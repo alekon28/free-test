@@ -16,6 +16,7 @@ import { CreateAnswerComponent } from './create-answer/create-answer.component';
 import { CreateTokenComponent } from './create-token/create-token.component';
 import { UserTestsComponent } from './user-tests/user-tests.component';
 import { PassTestComponent } from './pass-test/pass-test.component';
+import { TestStatComponent } from './test-stat/test-stat.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: AuthFormComponent},
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
     CreateTokenComponent,
     UserTestsComponent,
     PassTestComponent,
+    TestStatComponent,
   ],
   imports: [
     BrowserModule,

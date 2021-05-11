@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {QuestionData} from "./QuestionData";
+import {QuestionData} from "./DataModels/QuestionData";
 
 @Injectable({
   providedIn: 'root'

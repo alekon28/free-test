@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TestData} from "../TestData";
+import {TestData} from "../DataModels/TestData";
 import {ApiService} from "../api.service";
 
 @Component({

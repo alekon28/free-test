@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
-import {UserData} from "../UserData";
+import {UserData} from "../DataModels/UserData";
 
 @Component({
   selector: 'app-home',

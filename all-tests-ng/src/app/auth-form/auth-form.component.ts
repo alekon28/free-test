@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthData } from "../AuthData";
+import { AuthData } from "../DataModels/AuthData";
 import { ApiService } from "../api.service";
 import {Observable} from "rxjs";
-import {AuthToken} from "../AuthToken";
+import {AuthToken} from "../DataModels/AuthToken";
 
 @Component({
   selector: 'app-auth-form',
