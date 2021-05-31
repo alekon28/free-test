@@ -2,9 +2,9 @@
 Web application for creating tests
 
 
-#API
-##Возможности
-###Регистрация
+# API
+## Возможности
+### Регистрация
 Регистрация происходить при отправке запроса на `/api/signup`
 ```
 POST /api/signup HTTP/1.1
@@ -25,7 +25,7 @@ POST /api/signup HTTP/1.1
 {"id": "<user_id>"}
 * Closing connection 0
 ```
-###Авторизация
+### Авторизация
 Авторизация происходить при отправке запроса на `/api/signin`
 ```
 POST /api/signin HTTP/1.1
@@ -55,4 +55,18 @@ GET /api/test HTTP/1.1
 > Content-Length: 34
 > Authorization: Bearer <token>
 >
+```
+
+# Уствновка и запуск
+## API
+```
+sudo docker build -t free-tests ./
+sudo docker run -p 5000:5000 free-tests
+```
+## Angular
+```
+sudo apt install nodejs
+apt install npm
+npm install -g @angular/cli
+npm start
 ```

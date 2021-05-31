@@ -12,9 +12,5 @@ COPY --chown=flaskuser requirements.txt /home/flaskuser/requirements.txt
 RUN python -m pip install --user --no-cache-dir --trusted-host pypi.python.org -r /home/flaskuser/requirements.txt
 COPY --chown=flaskuser . /home/flaskuser
 ADD --chown=flaskuser . /home/flaskuser/app
-RUN mkdir /home/flaskuser/static/upload_keys
-RUN mkdir /home/flaskuser/static/keys
 
-
-RUN chmod +x /home/flaskuser/entrypoint.sh
-ENTRYPOINT ["python3","app.py"]
+ENTRYPOINT flask run --host=0.0.0.0
