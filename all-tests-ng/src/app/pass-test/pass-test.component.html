@@ -1,27 +1,29 @@
-<div class="container row">
-  <input type="text" class="form-control col-3" #testID placeholder="Test ID">
-  <button class="btn btn-primary" (click)="getTest(testID.value)">Get test</button>
-</div>
 <div *ngIf="testData; then thenBlock else elseBlock"></div>
 <ng-template class="container m-2" #thenBlock>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3">Your name:</span>
-    </div>
-  <input type="text" class="form-control" id="basic-url" #guestName (input)="changeGuestName(guestName.value)" >
+  <div class="input-group mb-3" *ngIf="currentQuestion == questionQuantity; then submitBlock else questionBlock ">
+
   </div>
+  <ng-template #questionBlock>
   <p class="h4">Test: <em>{{ testData.name }}</em></p>
-  <div class="container m-2" *ngFor="let question of testData.questions">
+  <div class="container m-2">
+    <p class="h5">Question: {{ currentQuestion + 1 }}/{{ questionQuantity }}</p>
     <div class="border border-primary ">
-      <p class="h4 m-2">{{ question.text }}</p>
-      <div *ngFor="let answer of question.answers" class="form-check form-check-inline m-2">
-        <input class="form-check-input" type="radio" name="{{ question.id }}" value="{{ answer.id }}" #answerId (change)="addAnswer(answerId.value)">
+      <p class="h4 m-2">{{ testData.questions[currentQuestion].text }}</p>
+      <div *ngFor="let answer of testData.questions[currentQuestion].answers" class="form-check form-check-inline m-2">
+        <input class="form-check-input" type="radio" name="{{ testData.questions[currentQuestion].id }}" value="{{ answer.id }}" #answerId (change)="addAnswer(answerId.value); nextQuestion()">
         <label class="form-check-label">{{ answer.text }}</label>
       </div>
     </div>
   </div>
+  </ng-template>
+  <ng-template #submitBlock>
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Your name:</span>
+    </div>
+  <input type="text" class="form-control" id="basic-url" #guestName (input)="changeGuestName(guestName.value)" >
   <button class="btn btn-primary" (click)="submit()">Submit test</button>
-  <div class="alert-success" *ngIf="response">{{ response.message }}</div>
+
+  </ng-template>
   <div class="border border-danger">
     {{ passTestData | json }}
   </div>
@@ -30,6 +32,15 @@
   </div>
 </ng-template>
 <ng-template class="container" #elseBlock>
-  <p class="h2">Enter test id</p>
+  <form class="container form-inline">
+    <div class="form-group">
+      <label>Test ID</label>
+      <input type="text" class="form-control mx-sm-3" #testID placeholder="Enter test ID">
+    </div>
+    <button class="btn btn-primary" (click)="getTest(testID.value)">Get test</button>
+  </form>
 </ng-template>
+<div class="alert-success" *ngIf="response">
+  <p class="text-center h4">{{ response.message }}</p>
+</div>
 

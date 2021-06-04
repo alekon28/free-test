@@ -3,6 +3,7 @@ import { AuthData } from "../DataModels/AuthData";
 import { ApiService } from "../api.service";
 import {Observable} from "rxjs";
 import {AuthToken} from "../DataModels/AuthToken";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-auth-form',
@@ -11,17 +12,14 @@ import {AuthToken} from "../DataModels/AuthToken";
 })
 export class AuthFormComponent implements OnInit {
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   apitoken: string = 'None';
 
-  checkToken(){
-    this.apitoken = this.api.jwt.token;
-  }
-  public authToken!: AuthToken;
+  public authToken: AuthToken;
 
-  username!: string;
-  password!: string;
+  username: string;
+  password: string;
   user: AuthData = {
     "username": "",
     "password": ""
@@ -44,8 +42,13 @@ export class AuthFormComponent implements OnInit {
     this.user.username = this.username;
     this.user.password = this.password;
 
-    this.api.authorization(this.user).subscribe((data: AuthToken) => this.authToken = {
-     token: data.token
+    this.api.authorization(this.user).subscribe((data: AuthToken) => {
+      this.authToken = data;
+      console.log("Принял " + data);
+      this.api.nextJWT(this.authToken);
+      this.router.navigate(['']);
+      console.log('token in service: ' + this.api.jwt.token);
+      console.log('Token in auth form:' + this.authToken.token);
     });
   }
 }

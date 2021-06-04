@@ -1,16 +1,15 @@
 <div class="container">
   <div class="row">
-    <input type="text" #testID class="form-control col-4" placeholder="Enter test ID">
+    <input type="text" #testID class="form-control col-4 mx-sm-3" placeholder="Enter test ID">
     <button (click)="getStat(testID.value)" class="btn btn-primary" >Get statistic</button>
   </div>
   <div class="container">
-    <div class="border border-info" *ngFor="let guest of testStat">
+    <div class="border border-info" *ngFor="let guest of guestScalesData">
       <div class="container">
         <p class="h4">Guest name: <em>{{ guest.guest_name }}</em></p>
         <p class="h4">Created at: <em>{{ guest.created_at }}</em></p>
-        <p class="h4">Guest answers:</p>
-        <div *ngFor="let answer of guest.answers">
-          <em>{{ answer.id }}</em>
+        <div *ngFor="let scale of guest.scales">
+          <p class="h5">{{ scale.scale_name }}: {{ scale.scale_value }}</p>
         </div>
       </div>
     </div>
@@ -18,6 +17,7 @@
 </div>
 
 
-<div class="alert alert-danger">
-  {{ testStat | json }}
+<div class="alert alert-danger container">
+  <p>TEST_STAT: {{ testStat | json }}</p>
+  <p>TEST_DATA: {{ testData | json }}</p>
 </div>

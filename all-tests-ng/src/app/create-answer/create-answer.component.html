@@ -2,13 +2,12 @@
   <p class="h4">Add answer options:</p>
   <input class="form-control col-12" type="text" placeholder="Enter answer text" #ansText (input)="changeAnswerText(ansText.value)">
     <select class="form-control col-1" #ansImTy (input)="changeAnswerImpactType(ansImTy.value)">
-      <option class="form-control">~</option>
-      <option class="form-control">+</option>
-      <option class="form-control">-</option>
+      <option class="form-control" value="+">+</option>
+      <option class="form-control" value="-">-</option>
     </select>
     <input class="form-control col-3" type="text" placeholder="Enter impact value" #ansImVa (input)="changeAnswerImpactValue(ansImVa.value)">
     <input class="form-control col-3" type="text" placeholder="Enter scale" #ansScVa (input)="changeScale(ansScVa.value)">
-    <button class="btn btn-primary col" (click)="submit();ansText.value = '';ansImTy.value = '~';ansImVa.value = ''">Add answer</button>
+    <button class="btn btn-primary col" (click)="submit();ansText.value = '';ansImVa.value = ''">Add answer</button>
 </div>
 
 

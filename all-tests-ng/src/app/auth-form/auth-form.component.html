@@ -1,8 +1,7 @@
 <form class="container">
   <div class="form-group">
-    <label >Email address</label>
-    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" (input)="usernameInputHandler($event)">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <label>Login</label>
+    <input type="text" class="form-control" placeholder="Login" (input)="usernameInputHandler($event)">
   </div>
   <div class="form-group">
     <label >Password</label>
@@ -13,7 +12,3 @@
 <div class="container alert-info" *ngIf="authToken">
   Token successfully received
 </div>
-<div class="container alert-danger" >
-  {{ apitoken }}
-</div>
-<button class="btn btn-dark" (click)="checkToken()">Check</button>
