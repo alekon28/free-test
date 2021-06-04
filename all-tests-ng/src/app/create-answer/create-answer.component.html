@@ -2,7 +2,7 @@
   <p class="h4">Add answer options:</p>
   <input class="form-control col-12" type="text" placeholder="Enter answer text" #ansText (input)="changeAnswerText(ansText.value)">
     <select class="form-control col-1" #ansImTy (input)="changeAnswerImpactType(ansImTy.value)">
-      <option class="form-control" value="+">+</option>
+      <option class="form-control" value="+" selected>+</option>
       <option class="form-control" value="-">-</option>
     </select>
     <input class="form-control col-3" type="text" placeholder="Enter impact value" #ansImVa (input)="changeAnswerImpactValue(ansImVa.value)">

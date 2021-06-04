@@ -17,9 +17,9 @@ export class CreateAnswerComponent implements OnInit {
   answerData: AnswerData = {
     "id": 0,
     "question_id": 0,
-    "scale_name": "",
+    "scale_name": "default",
     "text": "",
-    "impact_type": "",
+    "impact_type": "+",
     "impact_value": 0
   }
 

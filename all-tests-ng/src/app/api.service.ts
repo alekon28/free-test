@@ -24,7 +24,7 @@ export class ApiService {
     "token": ""
   }
 
-  private JWT = new BehaviorSubject(this.jwt);
+  public JWT = new BehaviorSubject(this.jwt);
   sharedJWT = this.JWT.asObservable();
 
   httpOptions = {

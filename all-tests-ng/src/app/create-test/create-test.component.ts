@@ -7,6 +7,7 @@ import {QuestionData} from "../DataModels/QuestionData";
 import {ScaleData} from "../DataModels/ScaleData";
 import {ApiService} from "../api.service";
 import {Message} from "../DataModels/Message";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {Message} from "../DataModels/Message";
 })
 export class CreateTestComponent implements OnInit {
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   testData: TestData = {
     "id": 0,

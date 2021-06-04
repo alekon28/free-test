@@ -58,13 +58,11 @@ export class TestStatComponent implements OnInit {
   }
 
   getNewScaleValue(current: number, impact_type: string, impact_value: number): number {
-    if (impact_type == "+") {
-      return current + impact_value;
-    }
     if (impact_type == "-") {
       return current - impact_value;
+    } else {
+      return current + impact_value;
     }
-    return current;
   }
 
   getValueByScale(scaleName: string, guestId: number): number {
