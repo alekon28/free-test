@@ -7,7 +7,7 @@
   <p class="h4">Test: <em>{{ testData.name }}</em></p>
   <div class="container m-2">
     <p class="h5">Question: {{ currentQuestion + 1 }}/{{ questionQuantity }}</p>
-    <div class="border border-primary ">
+    <div class="container alert alert-secondary">
       <p class="h4 m-2">{{ testData.questions[currentQuestion].text }}</p>
       <div *ngFor="let answer of testData.questions[currentQuestion].answers" class="form-check form-check-inline m-2">
         <input class="form-check-input" type="radio" name="{{ testData.questions[currentQuestion].id }}" value="{{ answer.id }}" #answerId (change)="addAnswer(answerId.value); nextQuestion()">
@@ -16,18 +16,17 @@
     </div>
   </div>
   </ng-template>
-  <ng-template #submitBlock>
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3">Your name:</span>
-    </div>
-  <input type="text" class="form-control" id="basic-url" #guestName (input)="changeGuestName(guestName.value)" >
-  <button class="btn btn-primary" (click)="submit()">Submit test</button>
-
+  <ng-template class="container" #submitBlock>
+    <form class="form-inline">
+      <label>Your name: </label>
+      <input type="text" class="form-control mx-sm-3" placeholder="Enter your name" #guestName (input)="changeGuestName(guestName.value)" >
+      <button class="btn btn-primary" (click)="submit()">Submit test</button>
+    </form>
   </ng-template>
-  <div class="border border-danger">
+  <div class="alert alert-danger">
     {{ passTestData | json }}
   </div>
-  <div class="border border-danger">
+  <div class="alert alert-danger">
     <em>{{ testData | json }}</em>
   </div>
 </ng-template>
@@ -40,7 +39,7 @@
     <button class="btn btn-primary" (click)="getTest(testID.value)">Get test</button>
   </form>
 </ng-template>
-<div class="alert-success" *ngIf="response">
+<div class="alert alert-success" *ngIf="response">
   <p class="text-center h4">{{ response.message }}</p>
 </div>
 

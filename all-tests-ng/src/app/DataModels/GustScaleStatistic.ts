@@ -4,6 +4,7 @@ export interface GustScaleStatistic {
   "created_at": string,
   "scales": {
     "scale_name": string,
-    "scale_value": number
+    "scale_value": number,
+    "max_value": number
   }[]
 }

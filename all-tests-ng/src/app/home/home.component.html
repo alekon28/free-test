@@ -3,10 +3,12 @@
 
 <ng-template class="container" #thenBlock>
   <p class="h2">User info</p>
-  <p class="h4">ID: <em>{{ userData.id }}</em></p>
-  <p class="h4">Username: <em>{{ userData.username }}</em></p>
-  <p class="h4">Created at: <em>{{ userData.created_at }}</em></p>
-  <p class="h4">Role: <em>{{ userData.role }}</em></p>
+  <div class="container alert alert-info">
+    <p class="h4">ID: <em>{{ userData.id }}</em></p>
+    <p class="h4">Username: <em>{{ userData.username }}</em></p>
+    <p class="h4">Created at: <em>{{ userData.created_at }}</em></p>
+    <p class="h4">Role: <em>{{ userData.role }}</em></p>
+  </div>
 </ng-template>
 <ng-template class="container" #elseBlock>
   <p class="h2">Please sign in</p>

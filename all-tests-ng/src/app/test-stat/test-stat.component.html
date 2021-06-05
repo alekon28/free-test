@@ -4,12 +4,23 @@
     <button (click)="getStat(testID.value)" class="btn btn-primary" >Get statistic</button>
   </div>
   <div class="container">
-    <div class="border border-info" *ngFor="let guest of guestScalesData">
-      <div class="container">
+    <p class="h3">General statistic</p>
+    <div class="" *ngFor="let scale of generalScalesData">
+        <div class="container alert alert-info">
+            <p class="h4">{{ scale.scale_name }}: {{ scale.scale_value.toFixed(2) }} - {{ (scale.scale_value/scale.max_value*100).toFixed(2) }}%</p>
+        </div>
+    </div>
+  </div>
+  <div class="container">
+    <p class="h3">Statistic by users</p>
+    <div class="" *ngFor="let guest of guestScalesData">
+      <div class="container alert alert-success">
         <p class="h4">Guest name: <em>{{ guest.guest_name }}</em></p>
         <p class="h4">Created at: <em>{{ guest.created_at }}</em></p>
         <div *ngFor="let scale of guest.scales">
-          <p class="h5">{{ scale.scale_name }}: {{ scale.scale_value }}</p>
+          <p class="h5">{{ scale.scale_name }}:
+            {{ scale.scale_value }}/{{ scale.max_value }} -
+            {{ (scale.scale_value/scale.max_value*100).toFixed(0)  }}%</p>
         </div>
       </div>
     </div>

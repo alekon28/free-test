@@ -22,6 +22,11 @@ export class TestStatComponent implements OnInit {
   testData: TestData;
 
   guestScalesData: GustScaleStatistic[] = [];
+  generalScalesData: {
+    "scale_name": string,
+    "scale_value": number,
+    "max_value": number
+  }[] = [];
 
   getTestScales(): string[] {
     let result: Set<string> = new Set<string>();
@@ -85,19 +90,23 @@ export class TestStatComponent implements OnInit {
 
   getScalesValuesByGuest(guestId: number): {
     "scale_name": string,
-    "scale_value": number
+    "scale_value": number,
+    "max_value": number
   }[]
   {
     let scalesValues: {
-    "scale_name": string,
-    "scale_value": number
+      "scale_name": string,
+      "scale_value": number,
+      "max_value": number
     }[] = [];
     let scales = this.getTestScales();
     for (let scale of scales) {
       let value = this.getValueByScale(scale, guestId);
+      let maxValue = this.getMaxScaleValue(scale);
       let scaleValue = {
         "scale_name": scale,
-        "scale_value": value
+        "scale_value": value,
+        "max_value": maxValue
       }
       scalesValues.push(scaleValue);
     }
@@ -125,7 +134,57 @@ export class TestStatComponent implements OnInit {
       this.testStat = data;
       this.guestScalesData = this.getStatisticsByScales(data);
       console.log(this.guestScalesData);
+      this.generalScalesData = this.getAllGeneralStat();
+      console.log(this.generalScalesData);
     });
+  }
+
+  getMaxScaleValue(scaleName: string): number {
+    let maxScaleValue: number = 0;
+    for (let question of this.testData.questions){
+      for (let answer of question.answers) {
+        if (answer.scale_name == scaleName && (answer.impact_type == "+" || answer.impact_type == "")) {
+          maxScaleValue += Math.abs(answer.impact_value);
+        }
+      }
+    }
+    return maxScaleValue;
+  }
+
+  getGeneralStatByScale(scaleName: string) {
+    let scaleData = {
+      "scale_name": scaleName,
+      "scale_value": 0,
+      "max_value": this.getMaxScaleValue(scaleName)
+    }
+    for (let guest of this.guestScalesData) {
+      for (let scale of guest.scales) {
+        if (scale.scale_name == scaleName) {
+          scaleData.scale_value += scale.scale_value;
+        }
+      }
+    }
+    scaleData.scale_value = scaleData.scale_value / this.guestScalesData.length;
+
+    return scaleData;
+  }
+
+  getAllGeneralStat(): {
+    "scale_name": string,
+    "scale_value": number,
+    "max_value": number
+  }[] {
+    let scales = this.getTestScales();
+    let genScalesStat: {
+      "scale_name": string,
+      "scale_value": number,
+      "max_value": number
+  }[] = [];
+    for (let scale of scales) {
+      genScalesStat.push(this.getGeneralStatByScale(scale));
+    }
+
+    return genScalesStat;
   }
 
   check() {
