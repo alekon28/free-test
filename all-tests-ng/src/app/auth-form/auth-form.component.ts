@@ -25,8 +25,6 @@ export class AuthFormComponent implements OnInit {
     "password": ""
   };
 
-
-
   ngOnInit(): void {
   }
 
